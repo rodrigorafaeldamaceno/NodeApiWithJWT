@@ -21,7 +21,7 @@ const UserSchema = new Schema({
 
 }, { timestamps: true })
 
-
+//executa antes do save
 UserSchema.pre('save', async function (next) {
   const hash = await bcrypt.hash(this.pass, 10)
   this.pass = hash
