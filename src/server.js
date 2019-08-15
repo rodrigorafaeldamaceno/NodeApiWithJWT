@@ -1,15 +1,13 @@
 const port = 3000
 const express = require('express')
 const bodyParser = require('body-parser')
-
 const server = express()
 const routes = require('./routes')
-
 
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: true }))
 
-server.use(routes)
+server.use('/auth', routes)
 
-console.log(`Servidor online na porta ${port}`)
+console.log(`Servidor online em http://localhost:${port}`)
 server.listen(port)
