@@ -2,7 +2,7 @@
 const User = require('../model/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const authConfig = require('../config/auth')
+const authConfig = require('../config/auth.json')
 
 
 //gera um token com um valor unico

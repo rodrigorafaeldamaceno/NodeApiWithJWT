@@ -1,8 +1,12 @@
 const express = require('express')
 const routes = express.Router()
+const authMiddleware = require('../middlewares/auth')
 
-routes.get('/', (req, res) => {
-    res.send({ status: 'Is work' })
+routes.use(authMiddleware)
+
+routes.get(
+    '/', (req, res) => {
+    res.send({ status: 'Is work', user: req.userId })
 })
 
 

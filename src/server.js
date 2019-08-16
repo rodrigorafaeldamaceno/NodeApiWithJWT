@@ -5,6 +5,7 @@ const server = express()
 const authRoutes = require('./routes/authRoutes')
 const projectRoutes = require('./routes/projectRoutes')
 
+
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: true }))
 
