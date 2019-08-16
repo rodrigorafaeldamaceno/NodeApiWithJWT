@@ -1,6 +1,6 @@
 const express = require('express')
 const routes = express.Router()
-const authController = require('../controller/authController')
+const authController = require('../app/controllers/authController')
 
 
 routes.get('/',  (req, res) => {

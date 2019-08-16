@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 
-const { Schema, model } = require('../database')
+const { Schema, model } = require('../../database')
 
 const UserSchema = new Schema({
   name: {
