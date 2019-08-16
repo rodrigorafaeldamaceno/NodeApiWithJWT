@@ -3,6 +3,12 @@ const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const authConfig = require('../../config/auth.json')
+const mailer = require('../../modules/mailer')
+
+
+//gera o token para redfinição de senha
+const crypto = require('crypto')
+
 
 
 //gera um token com um valor unico
@@ -56,5 +62,44 @@ module.exports = {
             token: generateToken({ id: user.id })
         })
 
+    },
+    async forgotPassword(req, res) {
+        const { email } = req.body
+
+        try {
+            const user = await User.findOne({ email })
+            if (!user) {
+                return res.status(400).send({ error: 'User not found!' })
+            }
+
+            //gera o token e salva no banco
+            const token = crypto.randomBytes(20).toString('hex')
+            let now = new Date()
+            console.log("now:", now.getHours())
+
+            now.setHours(now.getHours() + 1)
+
+            await User.findByIdAndUpdate(user.id, {
+                '$set': {
+                    passwordResetToken: token,
+                    passwordResetExpires: now
+                }
+            })
+            //console.log(token, now)
+            mailer.sendMail({
+                to: email,
+                from: 'no-reply@rsouza.com.br',
+                template: '/auth/forgotPassword',
+                context: { token }
+            }), (err) => {
+                if (err) return res.status(400).send({ error: 'Cannot send forgot password email' })
+
+                return res.send()
+            }
+
+        } catch (err) {
+            console.log(err)
+            res.status(400).send({ error: 'Error on forgot password' })
+        }
     }
 }

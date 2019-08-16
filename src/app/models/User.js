@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 
-const { Schema, model } = require('../../database')
+const { Schema, model } = require('../../database/database')
 
 const UserSchema = new Schema({
   name: {
@@ -18,6 +18,14 @@ const UserSchema = new Schema({
     required: true,
     select: false
   },
+  passwordResetToken: {
+    type: String,
+    select: false,
+  },
+  passwordResetExpires: {
+    type: Date,
+    select: false
+  }
 
 }, { timestamps: true })
 

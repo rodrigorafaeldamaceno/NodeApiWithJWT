@@ -2,8 +2,8 @@ const port = 3000
 const express = require('express')
 const bodyParser = require('body-parser')
 const server = express()
-const authRoutes = require('./routes/authRoutes')
-const projectRoutes = require('./routes/projectRoutes')
+const authRoutes = require('./app/routes/authRoutes')
+const projectRoutes = require('./app/routes/projectRoutes')
 
 
 server.use(bodyParser.json())

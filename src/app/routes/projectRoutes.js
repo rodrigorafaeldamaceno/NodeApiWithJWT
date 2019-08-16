@@ -1,6 +1,6 @@
 const express = require('express')
 const routes = express.Router()
-const authMiddleware = require('../app/middlewares/auth')
+const authMiddleware = require('../middlewares/auth')
 
 routes.use(authMiddleware)
 
